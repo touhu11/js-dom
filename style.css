@@ -3,3 +3,12 @@
 button {
   cursor: pointer;
 }
+
+.container{
+  display:flex;
+  flex-direction: column;
+  background:gray;
+  height: 150px;
+  width: 70px;
+  margin: 5px;
+}

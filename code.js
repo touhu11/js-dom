@@ -1,3 +1,4 @@
+
 let results = [null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 // The rollDie function Generates the random numbers between min = 1 and max = 6
@@ -51,16 +52,32 @@ function pairRoll(){
 // which are appended to the graph element (a flex container).
 function renderGraph(){
     graph.style.display ="flex"
-    graph.style.flexBasis="1000px"
+    graph.style.flexBasis="800px"
+    graph.style.flexDirecton = "row"
+
+    let max = results[0];
+    for (let i=0; i < results.length;i++){
+        if(max < results[i]){
+            max = results[i]
+        }
+    }
 
     for (let index=2; index < results.length; index +=1){
-        let div = document.createElement("div");
-        div.style.display="flex"
-        div.style.margin= "8px"
-        div.style.background= "rgb(190,186,186)"
-        div.innerText = `You rolled a ${index}: \n ${results[index]} times`;
-        graph.append(div)
-    }
+        let div_container = document.createElement("div");
+        div_container.classList.add("container")
+        let div1 = document.createElement("div");
+        let div2 = document.createElement("div");
+        
+        div1.style.margin= "8px"
+        div1.style.background= "blue";
+        div1.style.height = `${(results[index]/max)*100}px`
+        div1.style.width ="70";
+        
+        div2.innerText = `You rolled a ${index}: \n ${results[index]} times`;
+        div2.marginTop = "5px"
+        div_container.append(div1,div2);
+        graph.append(div_container)
+    } 
 
 }
 
@@ -71,7 +88,6 @@ let pairRoll_1000 = document.getElementById("pairRoll_1000")
 // Adding the event listener to the pairRoll_1000 button
 // with the callback function, simulateRoll_1000.
 pairRoll_1000.addEventListener("click", simulateRoll_1000)
-
 
 // The simulateRoll_1000 function simulates the roll of the pair of dice
 // for 1000 times by invoking the pairRoll function 1000 times
